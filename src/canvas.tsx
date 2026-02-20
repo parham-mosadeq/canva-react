@@ -195,8 +195,7 @@ export default function CanvasEditor() {
         )}
       </div>
 
-      {/* Right: Canvas */}
-      <div>
+      <div style={{ minWidth: "500px" }}>
         <canvas ref={canvasRef} />
       </div>
     </div>
