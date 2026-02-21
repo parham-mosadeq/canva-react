@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import * as fabric from "fabric";
+import addRect from "./shapes/Rectangle";
+import addCircle from "./shapes/Circle";
+import addTriangle from "./shapes/Triangle";
 
 export default function CanvasEditor() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -85,57 +88,7 @@ export default function CanvasEditor() {
     fabricCanvasRef.current.requestRenderAll();
   };
 
-  const addRect = () => {
-    const canvas = fabricCanvasRef.current;
-    if (!canvas) return;
-    const rect = new fabric.Rect({
-      left: 100,
-      top: 100,
-      width: 150,
-      height: 100,
-      fill: "#4caf50",
-      stroke: "#000",
-      strokeWidth: 3,
-      selectable: true,
-    });
-    canvas.add(rect);
-    canvas.setActiveObject(rect);
-    canvas.requestRenderAll();
-  };
-
-  const addCircle = () => {
-    const canvas = fabricCanvasRef.current;
-    if (!canvas) return;
-    const circle = new fabric.Circle({
-      left: 200,
-      top: 150,
-      radius: 60,
-      fill: "#2196f3",
-      stroke: "#000",
-      strokeWidth: 4,
-    });
-    canvas.add(circle);
-    canvas.setActiveObject(circle);
-    canvas.requestRenderAll();
-  };
-
-  const addTriangle = () => {
-    const canvas = fabricCanvasRef.current;
-    if (!canvas) return;
-    const triangle = new fabric.Triangle({
-      left: 250,
-      top: 120,
-      width: 160,
-      height: 120,
-      fill: "#ff9800",
-      stroke: "#000",
-      strokeWidth: 3,
-      selectable: true,
-    });
-    canvas.add(triangle);
-    canvas.setActiveObject(triangle);
-    canvas.requestRenderAll();
-  };
+  // shape creation functions are imported from ./shapes/*
 
   return (
     <div style={{ display: "flex", gap: "1.5rem", padding: "1rem" }}>
@@ -148,11 +101,17 @@ export default function CanvasEditor() {
         }}>
         <h2>Controls</h2>
 
-        <button onClick={addRect}>Add Rectangle</button>
-        <button onClick={addCircle} style={{ marginLeft: "0.5rem" }}>
+        <button onClick={() => addRect(fabricCanvasRef.current)}>
+          Add Rectangle
+        </button>
+        <button
+          onClick={() => addCircle(fabricCanvasRef.current)}
+          style={{ marginLeft: "0.5rem" }}>
           Add Circle
         </button>
-        <button onClick={addTriangle} style={{ marginLeft: "0.5rem" }}>
+        <button
+          onClick={() => addTriangle(fabricCanvasRef.current)}
+          style={{ marginLeft: "0.5rem" }}>
           Add Triangle
         </button>
 
