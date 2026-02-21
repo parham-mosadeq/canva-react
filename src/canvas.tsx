@@ -5,7 +5,7 @@ export default function CanvasEditor() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fabricCanvasRef = useRef<fabric.Canvas | null>(null);
   const [selectedObject, setSelectedObject] = useState<fabric.Object | null>(
-    null
+    null,
   );
 
   const [fillColor, setFillColor] = useState("#ff0000");
@@ -119,6 +119,24 @@ export default function CanvasEditor() {
     canvas.requestRenderAll();
   };
 
+  const addTriangle = () => {
+    const canvas = fabricCanvasRef.current;
+    if (!canvas) return;
+    const triangle = new fabric.Triangle({
+      left: 250,
+      top: 120,
+      width: 160,
+      height: 120,
+      fill: "#ff9800",
+      stroke: "#000",
+      strokeWidth: 3,
+      selectable: true,
+    });
+    canvas.add(triangle);
+    canvas.setActiveObject(triangle);
+    canvas.requestRenderAll();
+  };
+
   return (
     <div style={{ display: "flex", gap: "1.5rem", padding: "1rem" }}>
       {/* Left: Controls */}
@@ -133,6 +151,9 @@ export default function CanvasEditor() {
         <button onClick={addRect}>Add Rectangle</button>
         <button onClick={addCircle} style={{ marginLeft: "0.5rem" }}>
           Add Circle
+        </button>
+        <button onClick={addTriangle} style={{ marginLeft: "0.5rem" }}>
+          Add Triangle
         </button>
 
         {selectedObject && (
