@@ -3,6 +3,7 @@ import * as fabric from "fabric";
 import addRect from "./shapes/Rectangle";
 import addCircle from "./shapes/Circle";
 import addTriangle from "./shapes/Triangle";
+import Sidebar from "./components/Sidebar";
 
 export default function CanvasEditor() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -70,112 +71,41 @@ export default function CanvasEditor() {
       strokeWidth: Number(strokeWidth),
     });
 
-    if ("set" in selectedObject) {
-      if (selectedObject.type !== "circle") {
-        selectedObject.set({
-          scaleX: Number(width) / (selectedObject.width || 100),
-          scaleY: Number(height) / (selectedObject.height || 100),
-        });
-      } else {
-        const diameter = Number(width);
-        (selectedObject as fabric.Circle).set({
-          radius: diameter / 2,
-        });
-      }
+    if (selectedObject.type !== "circle") {
+      selectedObject.set({
+        scaleX: Number(width) / (selectedObject.width || 100),
+        scaleY: Number(height) / (selectedObject.height || 100),
+      });
+    } else {
+      const diameter = Number(width);
+      (selectedObject as fabric.Circle).set({ radius: diameter / 2 });
     }
 
     selectedObject.setCoords();
     fabricCanvasRef.current.requestRenderAll();
   };
 
-  // shape creation functions are imported from ./shapes/*
-
   return (
-    <div style={{ display: "flex", gap: "1.5rem", padding: "1rem" }}>
-      {/* Left: Controls */}
-      <div
-        style={{
-          width: "280px",
-          borderRight: "1px solid #ddd",
-          paddingRight: "1rem",
-        }}>
-        <h2>Controls</h2>
+    <div className="flex gap-6 p-6">
+      <Sidebar
+        onAddRect={() => addRect(fabricCanvasRef.current)}
+        onAddCircle={() => addCircle(fabricCanvasRef.current)}
+        onAddTriangle={() => addTriangle(fabricCanvasRef.current)}
+        selected={!!selectedObject}
+        fillColor={fillColor}
+        strokeColor={strokeColor}
+        strokeWidth={strokeWidth}
+        widthVal={width}
+        heightVal={height}
+        setFillColor={setFillColor}
+        setStrokeColor={setStrokeColor}
+        setStrokeWidth={setStrokeWidth}
+        setWidthVal={setWidth}
+        setHeightVal={setHeight}
+        onApply={applyChanges}
+      />
 
-        <button onClick={() => addRect(fabricCanvasRef.current)}>
-          Add Rectangle
-        </button>
-        <button
-          onClick={() => addCircle(fabricCanvasRef.current)}
-          style={{ marginLeft: "0.5rem" }}>
-          Add Circle
-        </button>
-        <button
-          onClick={() => addTriangle(fabricCanvasRef.current)}
-          style={{ marginLeft: "0.5rem" }}>
-          Add Triangle
-        </button>
-
-        {selectedObject && (
-          <div style={{ marginTop: "1.5rem" }}>
-            <h3>Edit Selected Shape</h3>
-            <label>Fill Color:</label>
-            <br />
-            <input
-              type="color"
-              value={fillColor}
-              onChange={(e) => setFillColor(e.target.value)}
-            />
-            <br />
-            <br />
-            <label>Border Color:</label>
-            <br />
-            <input
-              type="color"
-              value={strokeColor}
-              onChange={(e) => setStrokeColor(e.target.value)}
-            />
-            <br />
-            <br />
-            <label>Border Thickness:</label>
-            <br />
-            <input
-              type="range"
-              min="0"
-              max="20"
-              value={strokeWidth}
-              onChange={(e) => setStrokeWidth(Number(e.target.value))}
-            />{" "}
-            {strokeWidth}px
-            <br />
-            <br />
-            <label>Width:</label>
-            <br />
-            <input
-              type="number"
-              value={width}
-              onChange={(e) => setWidth(Number(e.target.value))}
-            />
-            <br />
-            <br />
-            <label>Height:</label>
-            <br />
-            <input
-              type="number"
-              value={height}
-              onChange={(e) => setHeight(Number(e.target.value))}
-            />
-            <br />
-            <br />
-            <button
-              onClick={applyChanges}
-              style={{ background: "#0070f3", color: "white" }}>
-              Apply Changes
-            </button>
-          </div>
-        )}
-      </div>
-
-      <div style={{ minWidth: "500px" }}>
+      <div className="min-w-[500px] flex-1">
         <canvas ref={canvasRef} />
       </div>
     </div>
