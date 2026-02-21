@@ -15,6 +15,8 @@ type Props = {
   setStrokeWidth: (v: number) => void;
   setWidthVal: (v: number) => void;
   setHeightVal: (v: number) => void;
+  borderStyle: string;
+  setBorderStyle: (v: string) => void;
   onApply: () => void;
 };
 
@@ -33,6 +35,8 @@ export default function Sidebar({
   setStrokeWidth,
   setWidthVal,
   setHeightVal,
+  borderStyle,
+  setBorderStyle,
   onApply,
 }: Props) {
   return (
@@ -113,6 +117,19 @@ export default function Sidebar({
           }`}>
           Apply to selected
         </button>
+
+        <label className="block text-xs text-slate-600 mt-4">
+          Border Style
+        </label>
+        <select
+          value={borderStyle}
+          onChange={(e) => setBorderStyle(e.target.value)}
+          className="w-full rounded-md border p-2 mt-2">
+          <option value="solid">Solid</option>
+          <option value="dashed">Dashed</option>
+          <option value="dotted">Dotted</option>
+          <option value="none">None</option>
+        </select>
       </div>
 
       <div className="mt-6 text-xs text-slate-500">

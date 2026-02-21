@@ -17,6 +17,7 @@ export default function CanvasEditor() {
   const [strokeWidth, setStrokeWidth] = useState(2);
   const [width, setWidth] = useState(100);
   const [height, setHeight] = useState(100);
+  const [borderStyle, setBorderStyle] = useState("solid");
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -65,10 +66,17 @@ export default function CanvasEditor() {
   const applyChanges = () => {
     if (!selectedObject || !fabricCanvasRef.current) return;
 
+    // compute strokeDashArray from borderStyle
+    let strokeDashArray: number[] | undefined = undefined;
+    if (borderStyle === "dashed") strokeDashArray = [10, 6];
+    else if (borderStyle === "dotted") strokeDashArray = [2, 4];
+    else if (borderStyle === "none") strokeDashArray = [];
+
     selectedObject.set({
       fill: fillColor,
       stroke: strokeColor,
       strokeWidth: Number(strokeWidth),
+      strokeDashArray: strokeDashArray,
     });
 
     if (selectedObject.type !== "circle") {
@@ -97,6 +105,8 @@ export default function CanvasEditor() {
         strokeWidth={strokeWidth}
         widthVal={width}
         heightVal={height}
+        borderStyle={borderStyle}
+        setBorderStyle={setBorderStyle}
         setFillColor={setFillColor}
         setStrokeColor={setStrokeColor}
         setStrokeWidth={setStrokeWidth}
