@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import * as fabric from "fabric";
-import addRect from "./shapes/Rectangle";
-import addCircle from "./shapes/Circle";
-import addTriangle from "./shapes/Triangle";
+import addRect from "./components/shapes/Rectangle";
+import addCircle from "./components/shapes/Circle";
+import addTriangle from "./components/shapes/Triangle";
 import Sidebar from "./components/Sidebar";
 
 export default function CanvasEditor() {

@@ -1,24 +1,4 @@
-import React from "react";
-
-type Props = {
-  onAddRect: () => void;
-  onAddCircle: () => void;
-  onAddTriangle: () => void;
-  selected: boolean;
-  fillColor: string;
-  strokeColor: string;
-  strokeWidth: number;
-  widthVal: number;
-  heightVal: number;
-  setFillColor: (v: string) => void;
-  setStrokeColor: (v: string) => void;
-  setStrokeWidth: (v: number) => void;
-  setWidthVal: (v: number) => void;
-  setHeightVal: (v: number) => void;
-  borderStyle: string;
-  setBorderStyle: (v: string) => void;
-  onApply: () => void;
-};
+import { SidebarProps } from "../interfaces/sidebar.interface";
 
 export default function Sidebar({
   onAddRect,
@@ -38,7 +18,7 @@ export default function Sidebar({
   borderStyle,
   setBorderStyle,
   onApply,
-}: Props) {
+}: SidebarProps) {
   return (
     <aside className="w-72 p-6 bg-gradient-to-b from-white/60 via-slate-50 to-white/40 shadow-xl rounded-lg">
       <div className="flex items-center justify-between mb-4">

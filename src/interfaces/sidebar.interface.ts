@@ -1,0 +1,19 @@
+export type SidebarProps = {
+  onAddRect: () => void;
+  onAddCircle: () => void;
+  onAddTriangle: () => void;
+  selected: boolean;
+  fillColor: string;
+  strokeColor: string;
+  strokeWidth: number;
+  widthVal: number;
+  heightVal: number;
+  setFillColor: (v: string) => void;
+  setStrokeColor: (v: string) => void;
+  setStrokeWidth: (v: number) => void;
+  setWidthVal: (v: number) => void;
+  setHeightVal: (v: number) => void;
+  borderStyle: string;
+  setBorderStyle: (v: string) => void;
+  onApply: () => void;
+};

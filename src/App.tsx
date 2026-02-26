@@ -1,4 +1,3 @@
-import "./App.css";
 import CanvasEditor from "./canvas";
 
 function App() {
