@@ -1,4 +1,7 @@
 import { SidebarProps } from "../interfaces/sidebar.interface";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
 
 export default function Sidebar({
   onAddRect,
@@ -31,44 +34,44 @@ export default function Sidebar({
       </div>
 
       <div className="flex gap-3 mb-6">
-        <button
+        <Button
           onClick={onAddRect}
           className="flex-1 py-2 px-3 bg-slate-900 text-white rounded-md hover:opacity-90 transition">
           Rectangle
-        </button>
-        <button
+        </Button>
+        <Button
           onClick={onAddCircle}
           className="py-2 px-3 bg-indigo-600 text-white rounded-md hover:opacity-90 transition">
           Circle
-        </button>
-        <button
+        </Button>
+        <Button
           onClick={onAddTriangle}
           className="py-2 px-3 bg-amber-500 text-white rounded-md hover:opacity-90 transition">
           Triangle
-        </button>
+        </Button>
       </div>
 
       <div className="border-t pt-4">
         <h3 className="text-sm font-medium text-slate-700 mb-3">Properties</h3>
 
-        <label className="block text-xs text-slate-600">Fill</label>
-        <input
+        <Label className="block text-xs text-black">Fill</Label>
+        <Input
           type="color"
           value={fillColor}
           onChange={(e) => setFillColor(e.target.value)}
           className="w-full h-10 rounded-md border p-1 mb-3"
         />
 
-        <label className="block text-xs text-slate-600">Stroke</label>
-        <input
+        <Label className="block text-xs text-black">Stroke</Label>
+        <Input
           type="color"
           value={strokeColor}
           onChange={(e) => setStrokeColor(e.target.value)}
           className="w-full h-10 rounded-md border p-1 mb-3"
         />
 
-        <label className="block text-xs text-slate-600">Stroke Width</label>
-        <input
+        <Label className="block text-xs text-black">Stroke Width</Label>
+        <Input
           type="range"
           min={0}
           max={20}
@@ -77,21 +80,21 @@ export default function Sidebar({
           className="w-full mb-3"
         />
         <div className="flex gap-2 items-center mb-3">
-          <input
+          <Input
             type="number"
             value={widthVal}
             onChange={(e) => setWidthVal(Number(e.target.value))}
-            className="w-1/2 rounded-md border p-2"
+            className="w-1/2 rounded-md border p-2 text-black"
           />
-          <input
+          <Input
             type="number"
             value={heightVal}
             onChange={(e) => setHeightVal(Number(e.target.value))}
-            className="w-1/2 rounded-md border p-2"
+            className="w-1/2 rounded-md border p-2 text-black"
           />
         </div>
 
-        <button
+        <Button
           onClick={onApply}
           disabled={!selected}
           className={`w-full py-2 rounded-md text-white transition ${
@@ -100,11 +103,11 @@ export default function Sidebar({
               : "bg-slate-300 text-slate-600"
           }`}>
           Apply to selected
-        </button>
+        </Button>
 
-        <label className="block text-xs text-slate-600 mt-4">
+        <Label className="block text-xs text-slate-600 mt-4">
           Border Style
-        </label>
+        </Label>
         <select
           value={borderStyle}
           onChange={(e) => setBorderStyle(e.target.value)}
@@ -115,9 +118,9 @@ export default function Sidebar({
           <option value="none">None</option>
         </select>
 
-        <label className="block text-xs text-slate-600 mt-4">Z-Index</label>
+        <Label className="block text-xs text-slate-600 mt-4">Z-Index</Label>
         <div className="flex gap-2 items-center mt-2">
-          <button
+          <Button
             onClick={onSendBackward}
             disabled={!selected}
             className={`flex-1 py-2 rounded-md transition ${
@@ -126,14 +129,16 @@ export default function Sidebar({
                 : "bg-slate-300 text-slate-600"
             }`}>
             ↓ Back
-          </button>
-          <input
+          </Button>
+          <Input
             type="number"
             value={zIndex}
             onChange={(e) => setZIndex(Number(e.target.value))}
-            className="w-16 rounded-md border p-2 text-center text-xs"
+            min={"-50"}
+            max={120}
+            className="w-16 rounded-md border p-2 text-center text-xs text-black"
           />
-          <button
+          <Button
             onClick={onBringForward}
             disabled={!selected}
             className={`flex-1 py-2 rounded-md transition ${
@@ -142,7 +147,7 @@ export default function Sidebar({
                 : "bg-slate-300 text-slate-600"
             }`}>
             ↑ Front
-          </button>
+          </Button>
         </div>
       </div>
 
