@@ -2,6 +2,14 @@ import { SidebarProps } from "../interfaces/sidebar.interface";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
 
 export default function Sidebar({
   onAddRect,
@@ -108,7 +116,7 @@ export default function Sidebar({
         <Label className="block text-xs text-slate-600 mt-4">
           Border Style
         </Label>
-        <select
+        {/* <select
           value={borderStyle}
           onChange={(e) => setBorderStyle(e.target.value)}
           className="w-full rounded-md border p-2 mt-2">
@@ -116,7 +124,20 @@ export default function Sidebar({
           <option value="dashed">Dashed</option>
           <option value="dotted">Dotted</option>
           <option value="none">None</option>
-        </select>
+        </select> */}
+        <Select value={borderStyle} onValueChange={(e) => setBorderStyle(e)}>
+          <SelectTrigger className="w-full rounded-md border p-2 mt-2 text-black">
+            <SelectValue placeholder="Border" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup className="text-black">
+              <SelectItem value="solid">Solid</SelectItem>
+              <SelectItem value="dashed">Dashed</SelectItem>
+              <SelectItem value="dotted">Dotted</SelectItem>
+              <SelectItem value="none">None</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
 
         <Label className="block text-xs text-slate-600 mt-4">Z-Index</Label>
         <div className="flex gap-2 items-center mt-2">
