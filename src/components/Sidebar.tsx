@@ -34,6 +34,7 @@ export default function Sidebar({
   onSendBackward,
   onApply,
 }: SidebarProps) {
+  console.log("LOGS IN SIDEBAR");
   return (
     <aside className="w-72 p-6 bg-linear-to-b from-white/60 via-slate-50 to-white/40 shadow-xl rounded-lg">
       <div className="flex items-center justify-between mb-4">
@@ -102,17 +103,6 @@ export default function Sidebar({
           />
         </div>
 
-        <Button
-          onClick={onApply}
-          disabled={!selected}
-          className={`w-full py-2 rounded-md text-white transition ${
-            selected
-              ? "bg-sky-600 hover:bg-sky-700"
-              : "bg-slate-300 text-slate-600"
-          }`}>
-          Apply to selected
-        </Button>
-
         <Label className="block text-xs text-slate-600 mt-4">
           Border Style
         </Label>
@@ -172,9 +162,16 @@ export default function Sidebar({
         </div>
       </div>
 
-      <div className="mt-6 text-xs text-slate-500">
-        Tip: Select a shape on the canvas to edit its properties.
-      </div>
+      <Button
+        onClick={onApply}
+        disabled={!selected}
+        className={`w-full py-2 rounded-md text-white transition block mt-7 ${
+          selected
+            ? "bg-sky-600 hover:bg-sky-700"
+            : "bg-slate-300 text-slate-600"
+        }`}>
+        Apply to selected
+      </Button>
     </aside>
   );
 }

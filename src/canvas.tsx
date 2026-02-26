@@ -6,6 +6,7 @@ import addTriangle from "./components/shapes/Triangle";
 import Sidebar from "./components/Sidebar";
 
 export default function CanvasEditor() {
+  console.log("LOGS IN CANVAS EDITOR");
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fabricCanvasRef = useRef<fabric.Canvas | null>(null);
   const [selectedObject, setSelectedObject] = useState<fabric.Object | null>(
@@ -114,7 +115,6 @@ export default function CanvasEditor() {
     setZIndex((selectedObject as any).zIndex || 0);
     fabricCanvasRef.current.requestRenderAll();
   };
-  console.log(selectedObject, "selectedObject");
   return (
     <div className="flex gap-6 p-6">
       <Sidebar
