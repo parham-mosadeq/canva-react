@@ -10,17 +10,21 @@ export default function Sidebar({
   strokeWidth,
   widthVal,
   heightVal,
+  zIndex,
   setFillColor,
   setStrokeColor,
   setStrokeWidth,
   setWidthVal,
   setHeightVal,
+  setZIndex,
   borderStyle,
   setBorderStyle,
+  onBringForward,
+  onSendBackward,
   onApply,
 }: SidebarProps) {
   return (
-    <aside className="w-72 p-6 bg-gradient-to-b from-white/60 via-slate-50 to-white/40 shadow-xl rounded-lg">
+    <aside className="w-72 p-6 bg-linear-to-b from-white/60 via-slate-50 to-white/40 shadow-xl rounded-lg">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold text-slate-800">Shapes</h2>
         <span className="text-sm text-slate-500">Quick add</span>
@@ -110,6 +114,36 @@ export default function Sidebar({
           <option value="dotted">Dotted</option>
           <option value="none">None</option>
         </select>
+
+        <label className="block text-xs text-slate-600 mt-4">Z-Index</label>
+        <div className="flex gap-2 items-center mt-2">
+          <button
+            onClick={onSendBackward}
+            disabled={!selected}
+            className={`flex-1 py-2 rounded-md transition ${
+              selected
+                ? "bg-slate-600 text-white hover:bg-slate-700"
+                : "bg-slate-300 text-slate-600"
+            }`}>
+            ↓ Back
+          </button>
+          <input
+            type="number"
+            value={zIndex}
+            onChange={(e) => setZIndex(Number(e.target.value))}
+            className="w-16 rounded-md border p-2 text-center text-xs"
+          />
+          <button
+            onClick={onBringForward}
+            disabled={!selected}
+            className={`flex-1 py-2 rounded-md transition ${
+              selected
+                ? "bg-slate-600 text-white hover:bg-slate-700"
+                : "bg-slate-300 text-slate-600"
+            }`}>
+            ↑ Front
+          </button>
+        </div>
       </div>
 
       <div className="mt-6 text-xs text-slate-500">

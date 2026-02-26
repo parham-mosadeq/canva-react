@@ -8,12 +8,16 @@ export type SidebarProps = {
   strokeWidth: number;
   widthVal: number;
   heightVal: number;
+  zIndex: number;
   setFillColor: (v: string) => void;
   setStrokeColor: (v: string) => void;
   setStrokeWidth: (v: number) => void;
   setWidthVal: (v: number) => void;
   setHeightVal: (v: number) => void;
+  setZIndex: (v: number) => void;
   borderStyle: string;
   setBorderStyle: (v: string) => void;
+  onBringForward: () => void;
+  onSendBackward: () => void;
   onApply: () => void;
 };
